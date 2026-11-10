@@ -27,8 +27,7 @@ public class UniteEnseignementRessource {
     // GET /UE | GET /UE?semestre=2 | GET /UE?code=123  (JSON)
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUE(@QueryParam("semestre") Integer semestre,
-                          @QueryParam("code") Integer code) {
+    public Response getUE(@QueryParam("semestre") Integer semestre,@QueryParam("code") Integer code) {
         if (code != null) {
             UniteEnseignement ue = business.getUEByCode(code);
             if (ue == null) {
@@ -36,9 +35,7 @@ public class UniteEnseignementRessource {
             }
             return Response.ok(ue).build();
         }
-        List<UniteEnseignement> liste = (semestre != null)
-                ? business.getUEBySemestre(semestre)
-                : business.getListeUE();
+        List<UniteEnseignement> liste = (semestre != null)? business.getUEBySemestre(semestre) : business.getListeUE();
         return Response.ok(new GenericEntity<List<UniteEnseignement>>(liste) {}).build();
     }
 
